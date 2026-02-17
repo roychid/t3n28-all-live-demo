@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t3n28 Football - League Tables</title>
+    <meta name="description" content="Football league tables and standings from major European leagues">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="../src/css/components.css">
+    <link rel="stylesheet" href="../src/css/responsive.css">
+    <link rel="stylesheet" href="../src/css/pages.css">
+</head>
+<body data-page="tables">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar" role="navigation">
+    <div class="nav-container">
+        <div class="nav-left">
+            <a href="/" class="logo">
+                <span class="logo-text">t3n28</span>
+                <span class="logo-accent">Football</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/live"><i class="fas fa-bolt"></i> Live</a></li>
+                <li><a href="/fixtures"><i class="far fa-calendar"></i> Fixtures</a></li>
+                <li><a href="/tables" class="active"><i class="fas fa-table"></i> Tables</a></li>
+                <li><a href="/news"><i class="far fa-newspaper"></i> News</a></li>
+                <li><a href="/videos"><i class="fas fa-video"></i> Videos</a></li>
+                <li><a href="/creator-dashboard"><i class="fas fa-tachometer-alt"></i> Creator</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search teams, players, news..." id="search-input">
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-login" id="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <button class="btn-register" id="register-btn"><i class="fas fa-user-plus"></i> Register</button>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="main-content">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1><i class="fas fa-table"></i> League Tables</h1>
+            <p>Current standings from top football leagues</p>
+        </div>
+        <div class="season-selector">
+            <select id="season-select" class="season-select">
+                <option value="2023/24">2023/24 Season</option>
+                <option value="2022/23">2022/23 Season</option>
+                <option value="2021/22">2021/22 Season</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- League Navigation Tabs -->
+    <div class="league-tabs-container">
+        <button class="league-nav-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="league-tabs-wrapper" id="league-tabs-wrapper">
+            <button class="league-tab active" data-league="premier">
+                <span class="league-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+                <span class="league-name">Premier League</span>
+            </button>
+            <button class="league-tab" data-league="laliga">
+                <span class="league-flag">🇪🇸</span>
+                <span class="league-name">La Liga</span>
+            </button>
+            <button class="league-tab" data-league="bundesliga">
+                <span class="league-flag">🇩🇪</span>
+                <span class="league-name">Bundesliga</span>
+            </button>
+            <button class="league-tab" data-league="seriea">
+                <span class="league-flag">🇮🇹</span>
+                <span class="league-name">Serie A</span>
+            </button>
+            <button class="league-tab" data-league="ligue1">
+                <span class="league-flag">🇫🇷</span>
+                <span class="league-name">Ligue 1</span>
+            </button>
+            <button class="league-tab" data-league="ucl">
+                <span class="league-flag">🇪🇺</span>
+                <span class="league-name">Champions League</span>
+            </button>
+        </div>
+        <button class="league-nav-btn next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Tables Container -->
+    <section class="tables-section">
+        <div id="tables-container" class="tables-wrapper">
+            <!-- Tables will be injected here -->
+        </div>
+    </section>
+
+    <!-- Table Legend -->
+    <div class="table-legend-container">
+        <div class="legend-title">Competition Zones</div>
+        <div class="legend-items">
+            <div class="legend-item">
+                <span class="legend-color champions-league"></span>
+                <span class="legend-text">Champions League</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color europa-league"></span>
+                <span class="legend-text">Europa League</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color conference-league"></span>
+                <span class="legend-text">Conference League</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color relegation"></span>
+                <span class="legend-text">Relegation</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>t3n28 Football</h3>
+            <p>Your ultimate destination for football live scores, news and highlights.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="/live">Live Scores</a></li>
+                <li><a href="/fixtures">Fixtures</a></li>
+                <li><a href="/tables">Tables</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/videos">Videos</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Download App</h4>
+            <div class="app-buttons">
+                <a href="#" class="app-btn">
+                    <i class="fab fa-apple"></i>
+                    <span>App Store</span>
+                </a>
+                <a href="#" class="app-btn">
+                    <i class="fab fa-google-play"></i>
+                    <span>Google Play</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 t3n28 Football. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="../src/js/main.js"></script>
+</body>
+</html>

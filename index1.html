@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>t3n28 - All Live Updates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: #16161f;
+            --bg-hover: #1e1e2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c8;
+            --text-muted: #6b6b85;
+            --border-color: rgba(255,255,255,0.07);
+            --card-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            --glow-blue: rgba(99, 102, 241, 0.4);
+            --glow-pink: rgba(236, 72, 153, 0.4);
+            --glow-green: rgba(16, 185, 129, 0.4);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(ellipse at 20% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 0.875rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #a78bfa, #ec4899, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .live-badge {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+        }
+
+        .date-display {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.04);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== NAV ===== */
+        .nav-container {
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 2rem;
+            position: sticky;
+            top: 62px;
+            z-index: 40;
+        }
+
+        .nav-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            scrollbar-width: none;
+        }
+
+        .nav-wrapper::-webkit-scrollbar { display: none; }
+
+        .nav-item {
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.06);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.25));
+            color: #c4b5fd;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        /* ===== MAIN ===== */
+        .main-container {
+            max-width: 1440px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* ===== HERO ===== */
+        .welcome-section {
+            position: relative;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1400&q=80&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.06;
+            z-index: 0;
+        }
+
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 30% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 60%);
+            z-index: 0;
+        }
+
+        .welcome-section > * { position: relative; z-index: 1; }
+
+        .welcome-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #a78bfa;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 50%, #f9a8d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== CATEGORY GRID ===== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 4/3;
+            min-height: 160px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: var(--card-shadow);
+        }
+
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover .card-bg {
+            transform: scale(1.08);
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-content {
+            position: absolute;
+            inset: 0;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .card-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+        }
+
+        .card-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .card-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.75rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Individual card themes */
+        .card-sports .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-sports .card-overlay {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-tech .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-tech .card-overlay {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-news .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-news .card-overlay {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-entertainment .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-entertainment .card-overlay {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-shopping .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-shopping .card-overlay {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-games .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-games .card-overlay {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-finance .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-finance .card-overlay {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .card-crypto .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=600&q=75&auto=format&fit=crop');
+        }
+        .card-crypto .card-overlay {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.7) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        /* ===== FEED SECTION ===== */
+        .feed-section {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 1.5rem;
+        }
+
+        .feed-container {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .feed-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .feed-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .btn-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .btn-icon:hover {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a78bfa;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .updates-list {
+            min-height: 350px;
+            padding: 1.25rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3.5rem 1rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.4;
+        }
+
+        .empty-state-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-text {
+            font-size: 0.825rem;
+            max-width: 260px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .feed-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+
+        .sidebar-widget {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+        }
+
+        .widget-header { margin-bottom: 1rem; }
+
+        .widget-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+        }
+
+        .widget-list { list-style: none; }
+
+        .widget-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .widget-list li:hover { color: var(--text-primary); }
+        .widget-list li:last-child { border-bottom: none; }
+        .widget-list li span { color: var(--text-primary); font-weight: 500; }
+
+        .quick-link-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .widget-list li:hover .quick-link-label { color: #a78bfa; }
+
+        /* ===== CATEGORY PAGES ===== */
+        .page-content { display: none; }
+        .page-content.active { display: block; }
+
+        .category-page-header {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .category-page-icon {
+            font-size: 2.25rem;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.04);
+            flex-shrink: 0;
+        }
+
+        .category-page-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .category-page-desc {
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 1.75rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.825rem;
+        }
+
+        .footer-brand {
+            background: linear-gradient(135deg, #a78bfa, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .footer-links { display: flex; gap: 2rem; }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover { color: #a78bfa; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            .feed-section { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 0.75rem; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            .welcome-title { font-size: 2rem; }
+            .main-container { padding: 0 1rem; }
+            .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .category-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="logo" onclick="switchCategory('all')">
+                    <img src="static images/label.png" alt="t3n28" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <span class="logo-text" style="display:none">t3n28</span>
+                </div>
+                <div class="live-badge">
+                    <span class="live-dot"></span>
+                    Live
+                </div>
+            </div>
+            <div class="date-display" id="currentDateTime"></div>
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <div class="nav-wrapper">
+            <div class="nav-item active" data-category="all" onclick="switchCategory('all')">🏠 Home</div>
+            <div class="nav-item" data-category="sport" onclick="switchCategory('sport')">⚽ Sports</div>
+            <div class="nav-item" data-category="tech" onclick="switchCategory('tech')">💻 Technology</div>
+            <div class="nav-item" data-category="news" onclick="switchCategory('news')">📰 News</div>
+            <div class="nav-item" data-category="entertainment" onclick="switchCategory('entertainment')">🎬 Entertainment</div>
+            <div class="nav-item" data-category="shopping" onclick="switchCategory('shopping')">🛍️ Shopping</div>
+            <div class="nav-item" data-category="games" onclick="switchCategory('games')">🎮 Games</div>
+            <div class="nav-item" data-category="finance" onclick="switchCategory('finance')">📈 Finance</div>
+            <div class="nav-item" data-category="crypto" onclick="switchCategory('crypto')">₿ Crypto</div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <!-- Home Page -->
+        <div id="page-all" class="page-content active">
+            <div class="welcome-section">
+                <div class="welcome-eyebrow">✦ Real-time feed</div>
+                <h1 class="welcome-title">t3n28 Live Updates</h1>
+                <p class="welcome-subtitle">Real-time updates from Sports, Tech, News, Entertainment, Shopping, Games, Finance, and Crypto — all in one place.</p>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-card card-sports" onclick="switchCategory('sport')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">⚽</div>
+                        <div class="card-name">Sports</div>
+                        <div class="card-desc">Live scores & transfers</div>
+                    </div>
+                </div>
+                <div class="category-card card-tech" onclick="switchCategory('tech')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">💻</div>
+                        <div class="card-name">Technology</div>
+                        <div class="card-desc">Gadgets, AI & tech news</div>
+                    </div>
+                </div>
+                <div class="category-card card-news" onclick="switchCategory('news')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">📰</div>
+                        <div class="card-name">News</div>
+                        <div class="card-desc">Breaking & world events</div>
+                    </div>
+                </div>
+                <div class="category-card card-entertainment" onclick="switchCategory('entertainment')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">🎬</div>
+                        <div class="card-name">Entertainment</div>
+                        <div class="card-desc">Movies, music & celebs</div>
+                    </div>
+                </div>
+                <div class="category-card card-shopping" onclick="switchCategory('shopping')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">🛍️</div>
+                        <div class="card-name">Shopping</div>
+                        <div class="card-desc">Deals & discounts</div>
+                    </div>
+                </div>
+                <div class="category-card card-games" onclick="switchCategory('games')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">🎮</div>
+                        <div class="card-name">Games</div>
+                        <div class="card-desc">News, releases & reviews</div>
+                    </div>
+                </div>
+                <div class="category-card card-finance" onclick="switchCategory('finance')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">📈</div>
+                        <div class="card-name">Finance</div>
+                        <div class="card-desc">Markets & stocks</div>
+                    </div>
+                </div>
+                <div class="category-card card-crypto" onclick="switchCategory('crypto')">
+                    <div class="card-bg"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-icon">₿</div>
+                        <div class="card-name">Crypto</div>
+                        <div class="card-desc">Bitcoin & blockchain</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feed-section">
+                <div class="feed-container">
+                    <div class="feed-header">
+                        <h2>Latest Updates</h2>
+                        <button class="btn-icon" onclick="refreshFeed()" title="Refresh">↻</button>
+                    </div>
+                    <div class="updates-list" id="all-updates">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📡</div>
+                            <div class="empty-state-title">Waiting for updates</div>
+                            <div class="empty-state-text">Real-time updates will appear here. Click refresh to load the latest content.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feed-sidebar">
+                    <div class="sidebar-widget">
+                        <div class="widget-header">
+                            <h3 class="widget-title">Quick Links</h3>
+                        </div>
+                        <ul class="widget-list">
+                            <li onclick="switchCategory('all')"><span>🏠</span><span class="quick-link-label">Home</span></li>
+                            <li onclick="switchCategory('sport')"><span>⚽</span><span class="quick-link-label">Sports</span></li>
+                            <li onclick="switchCategory('tech')"><span>💻</span><span class="quick-link-label">Technology</span></li>
+                            <li onclick="switchCategory('news')"><span>📰</span><span class="quick-link-label">News</span></li>
+                            <li onclick="switchCategory('crypto')"><span>₿</span><span class="quick-link-label">Crypto</span></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-widget">
+                        <div class="widget-header">
+                            <h3 class="widget-title">About</h3>
+                        </div>
+                        <ul class="widget-list">
+                            <li style="cursor:default">t3n28 brings you real-time updates across 8 categories. Click any category to explore its dedicated page.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Pages -->
+        <div id="page-sport" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">⚽</div>
+                <div>
+                    <h1 class="category-page-title">Sports</h1>
+                    <p class="category-page-desc">Live scores, transfers, and match updates</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Sports Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('sport')">↻</button>
+                </div>
+                <div class="updates-list" id="sport-updates">
+                    <div class="empty-state"><div class="empty-state-icon">⚽</div><div class="empty-state-title">No sports updates yet</div><div class="empty-state-text">Check back later for live sports updates</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-tech" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">💻</div>
+                <div>
+                    <h1 class="category-page-title">Technology</h1>
+                    <p class="category-page-desc">Gadgets, AI, and tech news</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Tech Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('tech')">↻</button>
+                </div>
+                <div class="updates-list" id="tech-updates">
+                    <div class="empty-state"><div class="empty-state-icon">💻</div><div class="empty-state-title">No tech updates yet</div><div class="empty-state-text">Check back later for technology news</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-news" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">📰</div>
+                <div>
+                    <h1 class="category-page-title">News</h1>
+                    <p class="category-page-desc">Breaking news and world events</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>News Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('news')">↻</button>
+                </div>
+                <div class="updates-list" id="news-updates">
+                    <div class="empty-state"><div class="empty-state-icon">📰</div><div class="empty-state-title">No news updates yet</div><div class="empty-state-text">Check back later for breaking news</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-entertainment" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">🎬</div>
+                <div>
+                    <h1 class="category-page-title">Entertainment</h1>
+                    <p class="category-page-desc">Movies, music, and celebrity news</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Entertainment Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('entertainment')">↻</button>
+                </div>
+                <div class="updates-list" id="entertainment-updates">
+                    <div class="empty-state"><div class="empty-state-icon">🎬</div><div class="empty-state-title">No entertainment updates yet</div><div class="empty-state-text">Check back later for entertainment news</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-shopping" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">🛍️</div>
+                <div>
+                    <h1 class="category-page-title">Shopping</h1>
+                    <p class="category-page-desc">Deals, discounts, and releases</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Shopping Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('shopping')">↻</button>
+                </div>
+                <div class="updates-list" id="shopping-updates">
+                    <div class="empty-state"><div class="empty-state-icon">🛍️</div><div class="empty-state-title">No shopping updates yet</div><div class="empty-state-text">Check back later for deals and offers</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-games" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">🎮</div>
+                <div>
+                    <h1 class="category-page-title">Games</h1>
+                    <p class="category-page-desc">Gaming news, releases, and reviews</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Gaming Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('games')">↻</button>
+                </div>
+                <div class="updates-list" id="games-updates">
+                    <div class="empty-state"><div class="empty-state-icon">🎮</div><div class="empty-state-title">No gaming updates yet</div><div class="empty-state-text">Check back later for gaming news</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-finance" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">📈</div>
+                <div>
+                    <h1 class="category-page-title">Finance</h1>
+                    <p class="category-page-desc">Markets, stocks, and economy</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Finance Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('finance')">↻</button>
+                </div>
+                <div class="updates-list" id="finance-updates">
+                    <div class="empty-state"><div class="empty-state-icon">📈</div><div class="empty-state-title">No finance updates yet</div><div class="empty-state-text">Check back later for market updates</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-crypto" class="page-content">
+            <div class="category-page-header">
+                <div class="category-page-icon">₿</div>
+                <div>
+                    <h1 class="category-page-title">Cryptocurrency</h1>
+                    <p class="category-page-desc">Bitcoin, Ethereum, and blockchain</p>
+                </div>
+            </div>
+            <div class="feed-container">
+                <div class="feed-header">
+                    <h2>Crypto Updates</h2>
+                    <button class="btn-icon" onclick="refreshCategory('crypto')">↻</button>
+                </div>
+                <div class="updates-list" id="crypto-updates">
+                    <div class="empty-state"><div class="empty-state-icon">₿</div><div class="empty-state-title">No crypto updates yet</div><div class="empty-state-text">Check back later for cryptocurrency news</div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>© 2024 <span class="footer-brand">t3n28</span> — All Live Updates</div>
+            <div class="footer-links">
+                <a onclick="switchCategory('all')">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('currentDateTime').textContent = now.toLocaleString('en-US', {
+                weekday: 'short', year: 'numeric', month: 'short',
+                day: 'numeric', hour: '2-digit', minute: '2-digit',
+                second: '2-digit', timeZoneName: 'short'
+            });
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        function switchCategory(category) {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            const nav = document.querySelector(`.nav-item[data-category="${category}"]`);
+            if (nav) nav.classList.add('active');
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page-${category}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showLoading(el) {
+            el.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⏳</div><div class="empty-state-title">Loading...</div><div class="empty-state-text">Please wait</div></div>`;
+        }
+
+        function refreshFeed() {
+            const feed = document.getElementById('all-updates');
+            showLoading(feed);
+            setTimeout(() => {
+                feed.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📡</div><div class="empty-state-title">Ready for updates</div><div class="empty-state-text">Connect your data source to see live updates</div></div>`;
+            }, 600);
+        }
+
+        function refreshCategory(category) {
+            const feed = document.getElementById(`${category}-updates`);
+            showLoading(feed);
+            setTimeout(() => {
+                feed.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📡</div><div class="empty-state-title">Ready for ${category} updates</div><div class="empty-state-text">Connect your data source to see live updates</div></div>`;
+            }, 600);
+        }
+    </script>
+</body>
+</html>

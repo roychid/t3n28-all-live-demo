@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>t3n28 Football - Live Scores, News & Highlights</title>
+    <meta name="description" content="t3n28 Football - Live scores, fixtures, league tables, transfer news and football highlights.">
+    <meta name="keywords" content="football live scores, fixtures, tables, football news, transfer news">
+    <meta name="author" content="t3n28 Football">
+    <meta property="og:title" content="t3n28 Football">
+    <meta property="og:description" content="Live scores, football news and highlights.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar" role="navigation">
+    <div class="nav-container">
+
+        <!-- LEFT -->
+        <div class="nav-left">
+            <a href="/" class="logo">
+                <span class="logo-text">t3n28</span>
+                <span class="logo-accent">Football</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="/" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/live">Live</a></li>
+                <li><a href="/fixtures"><i class="far fa-calendar"></i> Fixtures</a></li>
+                <li><a href="/tables"><i class="fas fa-table"></i> Tables</a></li>
+                <li><a href="/news"><i class="far fa-newspaper"></i> News</a></li>
+                <li><a href="/videos"><i class="fas fa-video"></i> Videos</a></li>
+                <li><a href="/creator-dashboard"><i class="fas fa-tachometer-alt"></i> Creator</a></li>
+            </ul>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="nav-right">
+
+            <!-- Search -->
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search teams, players, news..." id="search-input">
+            </div>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+
+            <!-- Auth Buttons -->
+            <div class="auth-buttons" id="auth-buttons">
+                <button class="btn-login" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn-register" id="register-btn">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="main-content">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Live Football. Real Time.</h1>
+            <p>Track live scores, follow fixtures, explore league tables and stay updated with the latest football news.</p>
+            <a href="/live" class="btn-primary">View Live Matches</a>
+        </div>
+    </section>
+
+    <!-- LIVE MATCHES -->
+    <section class="section live-section">
+        <div class="section-header">
+            <h2><i class="fas fa-bolt"></i> Live Matches</h2>
+            <a href="/live" class="view-all">View All</a>
+        </div>
+
+        <div id="live-matches-container" class="live-matches-container">
+            <!-- JS injects live matches here -->
+        </div>
+
+        <div id="no-live-message" class="empty-state" style="display: none;">
+            <p>No live matches at the moment.</p>
+        </div>
+    </section>
+
+    <!-- LATEST NEWS -->
+    <section class="section news-section">
+        <div class="section-header">
+            <h2><i class="far fa-newspaper"></i> Latest News</h2>
+            <a href="/news" class="view-all">View All</a>
+        </div>
+
+        <div id="news-container" class="news-grid">
+            <!-- JS injects news cards -->
+        </div>
+    </section>
+
+    <!-- TOP LEAGUES -->
+    <section class="section leagues-section">
+        <div class="section-header">
+            <h2><i class="fas fa-trophy"></i> Top Leagues</h2>
+        </div>
+
+        <div class="leagues-grid">
+            <a href="/tables?league=premier" class="league-card">Premier League</a>
+            <a href="/tables?league=laliga" class="league-card">La Liga</a>
+            <a href="/tables?league=seriea" class="league-card">Serie A</a>
+            <a href="/tables?league=bundesliga" class="league-card">Bundesliga</a>
+            <a href="/tables?league=champions" class="league-card">Champions League</a>
+        </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section class="section videos-section">
+        <div class="section-header">
+            <h2><i class="fas fa-video"></i> Highlights</h2>
+            <a href="/videos" class="view-all">View All</a>
+        </div>
+
+        <div id="video-container" class="video-grid">
+            <!-- JS injects videos -->
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-section">
+            <h3>t3n28 Football</h3>
+            <p>Your ultimate destination for football live scores, news and highlights.</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Explore</h4>
+            <ul>
+                <li><a href="/live">Live Scores</a></li>
+                <li><a href="/fixtures">Fixtures</a></li>
+                <li><a href="/tables">Tables</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/videos">Videos</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 t3n28 Football. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="src/js/main.js"></script>
+
+</body>
+</html>

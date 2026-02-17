@@ -1,0 +1,333 @@
+/* Live match indicators */
+.live-match {
+    border-left: 4px solid #ff4444;
+    position: relative;
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 0 rgba(255, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 10px rgba(255, 68, 68, 0.6); }
+    100% { box-shadow: 0 0 0 rgba(255, 68, 68, 0.4); }
+}
+
+.live-indicator {
+    background-color: #ff4444 !important;
+    animation: pulse 1.5s infinite;
+}
+
+.live-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4444;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    z-index: 10;
+}
+
+.pulse {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse-ring 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); }
+}
+
+.team-score.winning {
+    color: #28a745;
+    font-weight: 700;
+}
+
+.league-heading {
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #007bff;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.dark-theme .league-heading {
+    color: #f0f0f0;
+    border-bottom-color: #66b0ff;
+}
+
+.match-competition {
+    font-size: 0.8rem;
+    color: #666;
+    background-color: #f0f0f0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dark-theme .match-competition {
+    background-color: #444;
+    color: #ddd;
+}
+
+/* Fixture card styles */
+.fixtures-wrapper {
+    width: 100%;
+}
+
+.fixture-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.dark-theme .fixture-card {
+    background: #2d2d2d;
+}
+
+.fixture-card:hover {
+    transform: translateY(-5px);
+}
+
+.fixture-date-badge {
+    background: #007bff;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.fixture-teams {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+.team-info {
+    flex: 1;
+}
+
+.team-info.home {
+    text-align: right;
+}
+
+.team-info.away {
+    text-align: left;
+}
+
+.fixture-vs {
+    background: #f0f0f0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.dark-theme .fixture-vs {
+    background: #444;
+    color: #ddd;
+}
+
+.fixture-time, .fixture-venue {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.dark-theme .fixture-time,
+.dark-theme .fixture-venue {
+    color: #aaa;
+}
+
+.fixture-time i, .fixture-venue i {
+    margin-right: 0.3rem;
+    color: #007bff;
+}
+
+/* Table styles */
+.league-table-container {
+    margin-bottom: 2rem;
+}
+
+.league-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.dark-theme .league-title {
+    color: #f0f0f0;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.league-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.league-table th {
+    background: #f5f5f5;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+}
+
+.dark-theme .league-table th {
+    background: #3d3d3d;
+    color: #f0f0f0;
+}
+
+.league-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.dark-theme .league-table td {
+    border-bottom-color: #444;
+}
+
+.league-table tr.champions-league {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.league-table tr.europa-league {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.team-badge {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: #007bff;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.points {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* League tabs */
+.league-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.league-tab {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    background: #f0f0f0;
+    color: #666;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.dark-theme .league-tab {
+    background: #3d3d3d;
+    color: #aaa;
+}
+
+.league-tab:hover,
+.league-tab.active {
+    background: #007bff;
+    color: white;
+}
+
+/* Refresh indicator */
+.refresh-indicator {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.refresh-text {
+    color: #666;
+}
+
+.dark-theme .refresh-text {
+    color: #aaa;
+}
+
+.refresh-text i {
+    color: #007bff;
+    margin-right: 0.3rem;
+}
+
+.btn-refresh {
+    padding: 0.3rem 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s;
+}
+
+.btn-refresh:hover {
+    background: #0056b3;
+}
+
+.btn-refresh i {
+    margin-right: 0.3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .refresh-indicator {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .league-tabs {
+        gap: 0.5rem;
+    }
+    
+    .league-tab {
+        padding: 0.3rem 1rem;
+        font-size: 0.9rem;
+    }
+}
